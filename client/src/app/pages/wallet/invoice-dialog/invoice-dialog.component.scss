@@ -1,0 +1,32 @@
+.main {
+	text-align: center;
+	font-size: 10px;
+}
+mat-form-field {
+	width: 100%;
+	font-size: 14px;
+}
+
+.close {
+	float: right;
+	margin-top: -10px;
+	margin-right: -5px;
+	cursor: pointer;
+}
+.dest {
+	margin-top: 20px;
+	word-break: break-word;
+}
+.dest span{
+  font-size: 9px;
+}
+div {
+	font-size: 14px;
+}
+.pay {
+	margin-top: 20px;
+}
+#txn {
+	word-break: break-all;
+	font-size: 10px;
+}

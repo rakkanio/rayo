@@ -1,0 +1,41 @@
+<i class="close bi bi-x-circle" mat-button mat-dialog-close></i>
+<div class="main" *ngIf="isMainPage">
+    <h3 mat-dialog-title>Transfer</h3>
+    <div mat-dialog-content>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" novalidate>
+            <mat-form-field>
+                <mat-label>Account to be transfer</mat-label>
+                <textarea matInput name="toAccount" placeholder="" [(ngModel)]="model.toAccount" #toAccount="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && toAccount.invalid }" required></textarea>
+                <div *ngIf="f.submitted && toAccount.invalid" class="invalid-feedback">
+                    <div *ngIf="toAccount.errors && toAccount.errors.required">Account is required</div>
+                </div>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Amuount</mat-label>
+                <input type="number" name="amount" matInput [(ngModel)]="model.amount" #amount="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && amount.invalid }" required>
+                <div *ngIf="f.submitted && amount.invalid" class="invalid-feedback">
+                    <div *ngIf="amount.errors && amount.errors.required">Amount is required</div>
+                </div>
+            </mat-form-field>
+            <br>
+            <button class="btn-action" mat-raised-button color="primary">Transfer</button>
+
+        </form>
+    </div>
+</div>
+
+<div *ngIf="!isMainPage">
+    <div style="text-align: center">
+        <img src="assets/images/check-yes.png" alt="" height="50">
+    </div>
+    <div style="margin-top: 12px;">
+        txn id: <span id="txn">{{txnId}}</span>
+    </div>
+</div>
+
+<div>
+    <ngx-loading [show]="loading" [config]="{fullScreenBackdrop:true}"></ngx-loading>
+</div>

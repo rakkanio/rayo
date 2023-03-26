@@ -1,0 +1,32 @@
+<div class="col-lg-12 wrapper-content">
+  <div id="home-content">
+    <div class="col-lg-12 page-title">Wallet</div>
+    <div class="col-lg-4" id="transact-info">
+      <mat-card class="card-shadow">
+        <form>
+          <div class="col" id="bal-home"> <span>XRP</span>{{userBal || '0.00'}}</div>
+          <div class="col" id="bal-home"> <span>USD</span> {{userUSDBal || '0.00'}}</div>
+          <div>
+            <div class="col" style="text-align: center">
+              <br />
+              <div [ngClass]="{disableForOptIn: enableOptIn}">
+                <!-- <button type="button" [disabled]="errorMessage!==''" class="btn-action" mat-raised-button
+                  color="primary" (click)="openTransferDialog()">Pay
+                  USDC</button><br /> -->
+                <button type="button" [disabled]="errorMessage!==''" class="btn-action" mat-raised-button
+                  color="primary" (click)="openDecodeDialog()">Pay LN</button><br />
+                <!-- <button type="button" [disabled]="errorMessage!==''" class="btn-action" mat-raised-button
+                  color="primary" (click)="gotToPayBill()">BillPay</button> -->
+                <div class="err">
+                  <small>{{errorMessage}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+  <div>
+    <ngx-loading [show]="loading" [config]="{fullScreenBackdrop:true}"></ngx-loading>
+  </div>

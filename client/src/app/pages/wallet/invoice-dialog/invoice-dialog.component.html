@@ -1,0 +1,50 @@
+<i class="close bi bi-x-circle" mat-button mat-dialog-close></i>
+<div class="main">
+    <h6>Pay Invoice</h6>
+    <div mat-dialog-content>
+        <div *ngIf="isMainPage">
+            <form name="form" (ngSubmit)="f.form.valid && decodeInvoice(f)" #f="ngForm" novalidate>
+                <mat-form-field>
+                    <mat-label>Enter invoice payment request</mat-label>
+                    <textarea rows="4" matInput name="paymentRequest" placeholder="" [(ngModel)]="model.paymentRequest"
+                        #paymentRequest="ngModel" [ngClass]="{ 'is-invalid': f.submitted && paymentRequest.invalid }"
+                        required></textarea>
+                    <div *ngIf="f.submitted && paymentRequest.invalid" class="invalid-feedback">
+                        <div *ngIf="paymentRequest.errors && paymentRequest.errors.required">Payment request is required
+                        </div>
+                    </div>
+                </mat-form-field>
+                <br>
+                <button class="btn-action" mat-raised-button color="primary">Decode</button>
+            </form>
+        </div>
+        <div *ngIf="!isMainPage">
+            <div *ngIf="!showResponse">
+                <div class="row">
+                    <div class="col"> USDC: {{invoiceResult.data.usdcAmount}}</div>
+                    <div class="col">SATS: {{invoiceResult.data.satAmount}}</div>
+                </div>
+                <div class="row dest">
+                    <div class="col">
+                        Destination:<br /> RAYO <span>{{walletAddress}}</span>
+                    </div>
+                </div>
+                <div class="pay">
+                    <button class="btn-action" mat-raised-button color="primary" (click)="payInvoice()">Pay</button>
+                </div>
+            </div>
+            <div *ngIf="showResponse">
+                <div style="text-align: center">
+                    <img src="assets/images/check-yes.png" alt="" height="50">
+                </div>
+                <div style="margin-top: 12px;">
+                    txn id: <span id="txn">{{txnId}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <ngx-loading [show]="loading" [config]="{fullScreenBackdrop:true}"></ngx-loading>
+</div>
